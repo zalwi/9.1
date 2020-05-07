@@ -2,6 +2,6 @@
 /out
 *.iml
 Computer*
-/data
-/logic
+/data/*
+/logic/*
 tresc_zadania.txt
