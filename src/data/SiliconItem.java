@@ -36,6 +36,19 @@ abstract class SiliconItem extends ComputerItem implements Overclock {
         this.overclockFrequency = overclockFrequency;
     }
 
+    public void tryChangeFrequency(int frequencyInMhz, int riseOfTemperature, String itemName){
+        int additionalTemperature = ((frequencyInMhz + getOverclockFrequency())/100) *  riseOfTemperature;
+        if((getIdleTemperature() + additionalTemperature) > getMaxSafeTemperature()){
+            System.out.println(itemName + " nie może zostać podkręcona/y do " + (getBaseClockFrequency() + getOverclockFrequency() + frequencyInMhz)
+                    + " MHz, przekroczono maksymalną temperaturę! " + (getIdleTemperature() + additionalTemperature)
+                    + "/" + getMaxSafeTemperature());
+        }else
+        {
+            setOverclockFrequency((frequencyInMhz + getOverclockFrequency()));
+            System.out.println(itemName + " podkręcona/y do " + (getBaseClockFrequency() + getOverclockFrequency()));
+        }
+    }
+
     @Override
     public void eraseOverclock() {
         setOverclockFrequency(0);
